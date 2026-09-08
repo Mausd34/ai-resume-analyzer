@@ -1,28 +1,38 @@
 # AI Resume Analyzer
 
-Professional AI-assisted resume screening and job-match platform.
+A portfolio-grade resume screening and job-match application with PDF extraction, deterministic skill analysis, REST API, and browser dashboard.
 
 ## Features
-- PDF resume text extraction
+- PDF resume upload and text extraction
 - Skill detection and job-description matching
-- Match score with matched/missing skills
-- REST API and Streamlit demo UI
-- Health endpoint and automated tests
+- Match score, matched skills, missing skills and recommendations
+- Browser dashboard at `/`
+- Swagger/OpenAPI at `/docs`
+- Health and skill-catalog endpoints
+- Automated API tests
 - Docker-ready deployment
 
 ## Stack
-Python · FastAPI · Streamlit · scikit-learn · PyPDF · Docker
+Python · FastAPI · Streamlit · PyPDF · Pydantic · Docker
 
-## Quick start
+## Run locally
 ```bash
 python -m venv .venv
-# Windows: .venv\Scripts\activate
+.venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn api:app --reload
 ```
-Open `http://127.0.0.1:8000/docs` for the API.
+Open `http://127.0.0.1:8000/` for the dashboard or `/docs` for API documentation.
 
 ## API
 `POST /analyze` accepts multipart PDF resume + job description.
+`GET /health` returns service status.
+`GET /skills` returns the supported skill catalog.
 
-> Demo project for portfolio/education. AI scores are decision-support only.
+## Docker
+```bash
+docker build -t ai-resume-analyzer .
+docker run -p 8000:8000 ai-resume-analyzer
+```
+
+> Educational/portfolio decision-support software. Resume scores should not be used as the sole basis for employment decisions.
